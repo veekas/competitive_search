@@ -16,32 +16,32 @@ function State(options){
 //move(Int) => State
 State.prototype.move = function(location){
 	if (this.legalMoves().length == 0){
-		throw new Error("No move allowed")
-	};
+		throw new Error('No move allowed');
+	}
 	var ret = new State({
 		width: this.width,
 		height: this.height
 	});
 	ret.lastMove = location;
-	ret.lastMovePlayer = this.nextMovePlayer
+	ret.lastMovePlayer = this.nextMovePlayer;
 	ret.nextMovePlayer = (this.nextMovePlayer == 'x') ? 'o' : 'x';
 	ret.board = stateutils.dropped(this.board, location, this.nextMovePlayer);
 	return ret;
-}
+};
 
 //Returns an array of legal moves.
 // legaMoves() => [Int, Int, Int...]
 State.prototype.legalMoves = function(){
 	if (this.someoneWon()){
 		return [];
-	}else{
+	}else {
 		return this.board[0].map(function(content, index){
 				return (content == 0) ? index : content;
 			}).filter(function(thing, index){
-				return typeof(thing) == 'number'
+				return typeof (thing) === 'number';
 			});
 	}
-}
+};
 
 //Returns an array of possible successor states.
 //nextStates() => [State, State, State...]
@@ -50,35 +50,35 @@ State.prototype.nextStates = function(){
 	return this.legalMoves().map(function(move){
 		return self.move(move);
 	});
-}
+};
 
 //Returns the number of lines for side 'type'
 //of length 'length'
 //numLines(Int, Str) => Int
 State.prototype.numLines = function(length, type){
 	return stateutils.numLines(this.board, length, type);
-}
+};
 
 //someoneWon() => Bool
 //Returns whether someone one.
 State.prototype.someoneWon = function(){
 	var self = this;
-	return ['x','o'].some(function(side){
-		return (self.numLines(self.winning, side) !== 0)
+	return ['x', 'o'].some(function(side){
+		return (self.numLines(self.winning, side) !== 0);
 	});
-}
+};
 
 //winner => 'x' or 'o'
 State.prototype.winner = function(){
 	var self = this;
-	return ['x','o'].find(function(side){
+	return ['x', 'o'].find(function(side){
 		return self.numLines(self.winning, side);
 	});
-}
+};
 
 State.prototype.isDraw = function(){
 	return !this.someoneWon() && this.legalMoves().length == 0;
-}
+};
 
 State.load = function(ld){
 	var ret = new State();
@@ -90,6 +90,6 @@ State.load = function(ld){
 	ret.nextMovePlayer = ld.nextMovePlayer;
 	ret.board = ld.board;
 	return ret;
-}
+};
 
 module.exports = State;

@@ -1,3 +1,4 @@
+'strict mode';
 
 /*
  *
@@ -48,9 +49,9 @@ const makeMove = (state) => {
 
 	let bestMoveIndex = null;
 	let bestMoveValue = null;
-	allLegalMoves.forEach( (legalMove, i) => {
+	allLegalMoves.forEach((legalMove, i) => {
 
-		const potentialState = state.move(legalMove)
+		const potentialState = state.move(legalMove);
 
 		// Sets the playerMoving to be the maximizer.
 		// This variable gets handed down in the recursive
@@ -59,17 +60,15 @@ const makeMove = (state) => {
 		const stateValue = minimax(potentialState, depth, playerMoving);
 		//const stateValue = minimaxAlphaBetaWrapper(potentialState, depth, playerMoving)
 
-		if (stateValue > bestMoveValue || bestMoveValue === null){
+		if (stateValue > bestMoveValue || bestMoveValue === null) {
 			bestMoveIndex = i;
 			bestMoveValue = stateValue;
 		}
 
 	});
-	return allLegalMoves[bestMoveIndex]
+	return allLegalMoves[bestMoveIndex];
 
-}
-
-
+};
 
 /*
 You must write the function "heuristic".
@@ -94,16 +93,29 @@ You'll want to pass the tests defined in minimax_specs.js.
 const heuristic = (state, maximizingPlayer) => {
 
 	//This is how you can retrieve the minimizing player.
-    const minimizingPlayer = (maximizingPlayer == 'x') ? 'o' : 'x';
+	const minimizingPlayer = (maximizingPlayer == 'x') ? 'o' : 'x';
 
 	//An example.
-    const linesOfLengthTwoForX = state.numLines(2, 'x')
+    // const linesOfLengthTwoForX = state.numLines(2, 'x');
 
-    //Your code here.  Don't return random, obviously.
-	return Math.random()
-}
+	const lineOfThreeMultiplier = 3;
+	const lineOfTwoMultiplier = 2;
+	let maximizingPlayerScore = 0;
+	let minimizingPlayerScore = 0;
+	let score = maximizingPlayerScore - minimizingPlayerScore;
 
+	const linesOfLengthTwoForMaxPlayer = state.numLines(2, maximizingPlayer);
+	const linesOfLengthTwoForMinPlayer = state.numLines(2, minimizingPlayer);
+	const linesOfLengthThreeForMaxPlayer = state.numLines(3, maximizingPlayer);
+	const linesOfLengthThreeForMinPlayer = state.numLines(3, minimizingPlayer);
 
+	maximizingPlayerScore = linesOfLengthTwoForMaxPlayer * lineOfTwoMultiplier + linesOfLengthThreeForMaxPlayer * lineOfThreeMultiplier;
+	minimizingPlayerScore = linesOfLengthTwoForMinPlayer * lineOfTwoMultiplier + linesOfLengthThreeForMinPlayer * lineOfThreeMultiplier;
+
+	// console.log('maximizingPlayerScore: ', maximizingPlayerScore, '\nminimizingPlayerScore: ', minimizingPlayerScore);
+
+	return score;
+};
 
 /*
 You must write the function "minimax".
@@ -130,7 +142,7 @@ const minimax = (state, depth, maximizingPlayer) => {
 	var currentPlayer = state.nextMovePlayer;
 	//Your code here.
 	return Math.random();
-}
+};
 
 
 
@@ -154,9 +166,9 @@ const minimaxAlphaBetaWrapper = (state, depth, maximizingPlayer) => {
     does; this is why it is a very high value to start with.
 	*/
 	const minimaxAB = (state, depth, alpha, beta) => {
-	}
+	};
 
 	return minimaxAB(state, depth, -100000,100000);
-}
+};
 
 module.exports = {makeMove, minimax, heuristic};
