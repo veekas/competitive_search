@@ -130,7 +130,7 @@ describe('Testing some basic functions in the minimax evaluation function', func
 	   heuristic function, because there are no child states to
 	   call itself recursively on. */
 
-	xit('Also returns simply the value of the heuristic function when there are no moves left to make', function(){
+	it('Also returns simply the value of the heuristic function when there are no moves left to make', function(){
 		for(let x = 0; x < 5; x++){
 			//Make a new game state, with a board height of 1 so
 			//that s.nextStates or s.legalMoves returns an array

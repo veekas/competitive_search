@@ -146,10 +146,10 @@ const minimax = (state, depth, maximizingPlayer) => {
 
 	// console.log('possibleStates[0]', possibleStates[0], 'currentPlayer', currentPlayer);
 
+	// console.log('possibleStates', possibleStates);
+
 	// base case
-	if (!depth) {
-		return heuristic(state, maximizingPlayer);
-	}
+	if (!depth || !possibleStates.length) return heuristic(state, maximizingPlayer);
 
 	// use state.nextStates() to find possible successor states
 	// use state.nextMovePlayer
