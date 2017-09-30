@@ -98,11 +98,11 @@ const heuristic = (state, maximizingPlayer) => {
 	//An example.
     // const linesOfLengthTwoForX = state.numLines(2, 'x');
 
-	const lineOfThreeMultiplier = 3;
+	const lineOfThreeMultiplier = 4;
 	const lineOfTwoMultiplier = 2;
 	let maximizingPlayerScore = 0;
 	let minimizingPlayerScore = 0;
-	let score = maximizingPlayerScore - minimizingPlayerScore;
+	let score = 0;
 
 	const linesOfLengthTwoForMaxPlayer = state.numLines(2, maximizingPlayer);
 	const linesOfLengthTwoForMinPlayer = state.numLines(2, minimizingPlayer);
@@ -111,8 +111,9 @@ const heuristic = (state, maximizingPlayer) => {
 
 	maximizingPlayerScore = linesOfLengthTwoForMaxPlayer * lineOfTwoMultiplier + linesOfLengthThreeForMaxPlayer * lineOfThreeMultiplier;
 	minimizingPlayerScore = linesOfLengthTwoForMinPlayer * lineOfTwoMultiplier + linesOfLengthThreeForMinPlayer * lineOfThreeMultiplier;
+	score = maximizingPlayerScore - minimizingPlayerScore;
 
-	// console.log('maximizingPlayerScore: ', maximizingPlayerScore, '\nminimizingPlayerScore: ', minimizingPlayerScore);
+	// console.log('maximizingPlayerScore: ', maximizingPlayerScore, '\nminimizingPlayerScore: ', minimizingPlayerScore, 'score: ', score);
 
 	return score;
 };
