@@ -69,7 +69,7 @@ describe("Testing some basic functionality for the heuristics", function(){
 		expect(lower < higher).to.equal(true);
 	});
 
-	xit("It returns a higher score when 'x' has three in a single line, and 'o' has two connected, and one not connected", function(){
+	it("It returns a higher score when 'x' has three in a single line, and 'o' has two connected, and one not connected", function(){
 		let s = new State();
 		s = s.move(1);  //X moves
 		s = s.move(0);  //O moves
@@ -84,7 +84,7 @@ describe("Testing some basic functionality for the heuristics", function(){
 		expect(lower < higher).to.equal(true);
 	});
 
-	xit("It returns a higher score when 'x' has four in a single line, and 'o' doens'true", function(){
+	it("It returns a higher score when 'x' has four in a single line, and 'o' doens't", function(){
 		//Make a new game state
 		let s = new State();
 		s = s.move(0);  //X moves
