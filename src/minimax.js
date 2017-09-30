@@ -141,8 +141,20 @@ const minimax = (state, depth, maximizingPlayer) => {
 	var minimizingPlayer = (maximizingPlayer == 'x') ? 'o' : 'x';
 	var possibleStates = state.nextStates();
 	var currentPlayer = state.nextMovePlayer;
-	//Your code here.
-	return Math.random();
+
+	// currentPlayer === 'x' ? currentPlayer = maximizingPlayer : currentPlayer = minimizingPlayer;
+
+	// console.log('possibleStates[0]', possibleStates[0], 'currentPlayer', currentPlayer);
+
+	// base case
+	if (!depth) {
+		return heuristic(state, maximizingPlayer);
+	}
+
+	// use state.nextStates() to find possible successor states
+	// use state.nextMovePlayer
+	// return a number evaluating the state (like the heuristic)
+
 };
 
 
